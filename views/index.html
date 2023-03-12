@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <!-- GOOGLE FONT -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <div class="">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-primary ">
+      <a class="navbar-brand ms-5" href="#">QUẢN LÝ HỌC VIÊN</a>
+    </nav>
+
+    <div class="display-5 my-4 text-center ">DANH SÁCH HỌC VIÊN</div>
+
+    <br />
+    <!-- Tab panes -->
+    <div class="tab-content container">
+      <!--Danh sách sản phẩm -->
+      <div role="tabpanel" class="tab-pane in active" id="DanhSachHV">
+        <div class="row d-flex justify-content-around mb-2">
+          <div class="col-md-4 ms-2">
+            <!-- BEGIN BUTTOM THÊM MỚI -->
+            <button id="btnThem" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalStudent">Add
+              Student</button>
+            <button id="btnThem" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalEmployee">Add
+              Employee</button>
+            <button id="btnThem" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCustomer">Add
+              Customer</button>
+            <!-- END BUTTON THÊM MỚI -->
+          </div>
+          <div class="col-md-4">
+            <div class="list d-flex justify-content-start">
+              <select id="typePerson" class="form-select">
+                <option selected>All types</option>
+                <option value="1">Student</option>
+                <option value="2">Employee</option>
+                <option value="3">Customer</option>
+              </select>
+              <select id="sortType" class="form-select  ms-2">
+                <option selected>Sort</option>
+                <option value="1">Sort by name</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="clear-fix"></div>
+        <div class="tblPerson" id="tblPerson">
+          <table class="table table-bordered">
+            <thead>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Email</th>
+              <th>Type</th>
+            </thead>
+            <tbody id="tableList"></tbody>
+          </table>
+        </div>
+        <br />
+      </div>
+    </div>
+<!-- Modal Student-->
+<div class="modal fade" id="exampleModalStudent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Student</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>ID</label>
+          <input id="studentId" class="form-control form-controlad" placeholder="ID" />
+        </div>
+        <div class="form-group">
+          <label>Name</label>
+          <input id="studentName" class="form-control form-controlad" placeholder="Name" />
+        </div>
+        <div class="form-group">
+          <label>Address</label>
+          <input id="studentAddress" class="form-control form-controlad" placeholder="Address" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input id="studentEmail" class="form-control form-controlad" placeholder="Email" />
+        </div>
+        <div class="form-group">
+          <label>Math</label>
+          <input id="math" class="form-control form-controlad" placeholder="" />
+        </div>
+        <div class="form-group">
+          <label>Physics</label>
+          <input id="physics" class="form-control form-controlad" placeholder="" />
+        </div>
+        <div class="form-group">
+          <label>Chemistry</label>
+          <input id="chemistry" class="form-control form-controlad" placeholder="" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="btnAddStudent">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+<!-- Modal Employee-->
+<div class="modal fade" id="exampleModalEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Employee</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>ID</label>
+          <input id="employeeId" class="form-control form-controlad" placeholder="ID" />
+        </div>
+        <div class="form-group">
+          <label>Name</label>
+          <input id="employeeName" class="form-control form-controlad" placeholder="Name" />
+        </div>
+        <div class="form-group">
+          <label>Address</label>
+          <input id="employeeAddress" class="form-control form-controlad" placeholder="Address" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input id="employeeEmail" class="form-control form-controlad" placeholder="Email" />
+        </div>
+        <div class="form-group">
+          <label>Number of working days</label>
+          <input id="days" class="form-control form-controlad" placeholder="" />
+        </div>
+        <div class="form-group">
+          <label>Daily Salary</label>
+          <input id="salaryUnit" class="form-control form-controlad" placeholder="" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="btnAddEmployee">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+<!-- Modal Customer-->
+<div class="modal fade" id="exampleModalCustomer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>ID</label>
+          <input id="customerId" class="form-control form-controlad" placeholder="ID" />
+        </div>
+        <div class="form-group">
+          <label>Name</label>
+          <input id="customerName" class="form-control form-controlad" placeholder="Name" />
+        </div>
+        <div class="form-group">
+          <label>Address</label>
+          <input id="customerAddress" class="form-control form-controlad" placeholder="Address" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input id="customerEmail" class="form-control form-controlad" placeholder="Email" />
+        </div>
+        <div class="form-group">
+          <label>Name of company</label>
+          <input id="company" class="form-control form-controlad" placeholder="" />
+        </div>
+        <div class="form-group">
+          <label>Bill Value</label>
+          <input id="billValue" class="form-control form-controlad" placeholder="" />
+        </div>
+        <div class="form-group">
+          <label>Feedback</label>
+          <select id='inputRate' class='form-select w-50'>
+            <option valued>Lựa chọn</option>
+            <option value='1' >Tốt</option>
+            <option value='2' >Không tốt</option>
+        </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="btnAddCustomer">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+  </div>
+  <div id="container"></div>
+  <style>
+    #container {
+      min-width: 310px;
+      max-width: 800px;
+      height: 400px;
+      margin: 0 auto;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="module" src="../controllers/main.js"></script>
+
+</body>
+
+</html>
