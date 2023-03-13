@@ -20,9 +20,7 @@
     <nav class="navbar navbar-expand-sm navbar-dark bg-primary ">
       <a class="navbar-brand ms-5" href="#">QUẢN LÝ HỌC VIÊN</a>
     </nav>
-
     <div class="display-5 my-4 text-center ">DANH SÁCH HỌC VIÊN</div>
-
     <br />
     <!-- Tab panes -->
     <div class="tab-content container">
@@ -75,10 +73,10 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Student</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Student</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" id="inputList">
         <div class="form-group">
           <label>ID</label>
           <input id="studentId" class="form-control form-controlad" placeholder="ID" />
@@ -109,8 +107,9 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" id="btnAddStudent">Add</button>
+        <button type="button" class="btn btn-info" id="btnEditStudent">Edit</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -121,7 +120,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Employee</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Employee</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -151,8 +150,9 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" id="btnAddEmployee">Add</button>
+        <button type="button" class="btn btn-info" id="btnEditEmployee">Edit</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -163,7 +163,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Customer</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -201,24 +201,16 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" id="btnAddCustomer">Add</button>
+        <button type="button" class="btn btn-info" id="btnEditCustomer">Edit</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
 <!-- End Modal -->
-
   </div>
   <div id="container"></div>
-  <style>
-    #container {
-      min-width: 310px;
-      max-width: 800px;
-      height: 400px;
-      margin: 0 auto;
-    }
-  </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
@@ -227,5 +219,4 @@
   <script type="module" src="../controllers/main.js"></script>
 
 </body>
-
 </html>
