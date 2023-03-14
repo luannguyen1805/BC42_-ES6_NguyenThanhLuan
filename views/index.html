@@ -29,11 +29,11 @@
         <div class="row d-flex justify-content-around mb-2">
           <div class="col-md-4 ms-2">
             <!-- BEGIN BUTTOM THÊM MỚI -->
-            <button id="btnThem" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalStudent">Add
+            <button id="btnAddStudent" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalStudent">Add
               Student</button>
-            <button id="btnThem" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalEmployee">Add
+            <button id="btnAddEmployee" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalEmployee">Add
               Employee</button>
-            <button id="btnThem" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCustomer">Add
+            <button id="btnAddCustomer" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCustomer">Add
               Customer</button>
             <!-- END BUTTON THÊM MỚI -->
           </div>
@@ -45,7 +45,7 @@
                 <option value="2">Employee</option>
                 <option value="3">Customer</option>
               </select>
-              <select id="sortType" class="form-select  ms-2">
+              <select id="arrangeName" class="form-select  ms-2">
                 <option selected>Sort</option>
                 <option value="1">Sort by name</option>
               </select>
@@ -73,7 +73,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Student</h5>
+        <h5 class="modal-title label-student" id="exampleModalLabel"></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="inputList">
@@ -106,10 +106,7 @@
           <input id="chemistry" class="form-control form-controlad" placeholder="" />
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="btnAddStudent">Add</button>
-        <button type="button" class="btn btn-info" id="btnEditStudent">Edit</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <div class="modal-footer" id="modal-footer-S">
       </div>
     </div>
   </div>
@@ -120,7 +117,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Employee</h5>
+        <h5 class="modal-title label-employee" id="exampleModalLabel"></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -149,10 +146,7 @@
           <input id="salaryUnit" class="form-control form-controlad" placeholder="" />
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="btnAddEmployee">Add</button>
-        <button type="button" class="btn btn-info" id="btnEditEmployee">Edit</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <div class="modal-footer" id="modal-footer-E">
       </div>
     </div>
   </div>
@@ -163,7 +157,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Customer</h5>
+        <h5 class="modal-title label-customer" id="exampleModalLabel"></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -195,20 +189,34 @@
           <label>Feedback</label>
           <select id='inputRate' class='form-select w-50'>
             <option valued>Lựa chọn</option>
-            <option value='1' >Tốt</option>
-            <option value='2' >Không tốt</option>
+            <option value='Good' >Good</option>
+            <option value='Bad' >Bad</option>
         </select>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="btnAddCustomer">Add</button>
-        <button type="button" class="btn btn-info" id="btnEditCustomer">Edit</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <div class="modal-footer" id="modal-footer-C">
       </div>
     </div>
   </div>
 </div>
 <!-- End Modal -->
+
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="detailsTitle"></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="detailsBody">
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
   </div>
   <div id="container"></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"

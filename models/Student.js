@@ -7,6 +7,6 @@ export class Student extends Person {
         this.chemistry = chemistry;
     }
     calcAveScore(){
-        return Math.floor(((+this.math) + (+this.physics) + (+this.chemistry)) / 3);
+        return Math.round(((+this.math) + (+this.physics) + (+this.chemistry)) / 3);
     }
 }
