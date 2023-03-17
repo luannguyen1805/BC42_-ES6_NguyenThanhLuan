@@ -19,6 +19,10 @@ window.createStudent = () => {
     let math = getElement("#math").value;
     let physics = getElement("#physics").value;
     let chemistry = getElement("#chemistry").value;
+
+    if (!validateStudent()) {
+        return;
+    }
     const student = new Student(id, name, address, email, math, physics, chemistry);
     let index = personList.findIndex(person => person.id === id);
     if (index === -1) {
@@ -26,14 +30,19 @@ window.createStudent = () => {
     } else {
         personList[index] = student;
     }
-    setLocalStorage();
+
+    
+   
     renderPerson(personList);
+    setLocalStorage();
+    resetStudent();
+
 }
 getElement("#btnAddStudent").onclick = () => {
     getElement("#studentId").disabled = false;
     getElement(".label-student").innerHTML = "ADD STUDENT";
     getElement("#modal-footer-S").innerHTML = `
-  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="createStudent()">Thêm</button>
+  <button type="button" class="btn btn-primary" onclick="createStudent()">Thêm</button>
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
   `;
 }
@@ -46,6 +55,9 @@ window.createEmployee = () => {
     let email = getElement("#employeeEmail").value;
     let days = getElement("#days").value;
     let salaryUnit = getElement("#salaryUnit").value;
+    if(!validateEmployee()){
+        return;
+    }
     const employee = new Employee(id, name, address, email, days, salaryUnit);
     let index = personList.findIndex(person => person.id === id)
     if (index === -1) {
@@ -53,14 +65,15 @@ window.createEmployee = () => {
     } else {
         personList[index] = employee;
     }
-    setLocalStorage();
     renderPerson(personList);
+    setLocalStorage();
+    resetEmployee()
 }
 getElement("#btnAddEmployee").onclick = () => {
     getElement("#employeeId").disabled = false;
     getElement(".label-employee").innerHTML = "ADD EMPLOYEE";
     getElement("#modal-footer-E").innerHTML = `
-  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="createEmployee()">Thêm</button>
+  <button type="button" class="btn btn-primary" onclick="createEmployee()">Thêm</button>
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
   `;
 }
@@ -88,6 +101,9 @@ window.createCustomer = () => {
         }
     }
 
+    if(!validateCustomer()){
+        return;
+    }
     const customer = new Customer(id, name, address, email, company, bill, rate);
     let index = personList.findIndex(person => person.id === id)
     if (index === -1) {
@@ -97,12 +113,13 @@ window.createCustomer = () => {
     }
     setLocalStorage();
     renderPerson(personList);
+    resetCustomer()
 }
 getElement("#btnAddCustomer").onclick = () => {
     getElement("#customerId").disabled = false;
     getElement(".label-customer").innerHTML = "ADD CUSTOMER";
     getElement("#modal-footer-C").innerHTML = `
-  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="createCustomer()">Thêm</button>
+  <button type="button" class="btn btn-primary" onclick="createCustomer()">Thêm</button>
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
   `;
 }
@@ -273,7 +290,7 @@ function arrangeName() {
         tempList = personList.sort((a, b) => {
             if (a.name < b.name) {
                 return -1;
-            } else { 
+            } else {
                 return 1;
             }
 
@@ -296,7 +313,7 @@ window.showInfo = (personId) => {
     <label class='fw-bold'>Email: </label>
     <span>${person.email}</span><br>
     `;
-    switch(person.constructor.name){
+    switch (person.constructor.name) {
         case 'Student': {
             html += `
             <label class='fw-bold'>Math: </label>
@@ -309,7 +326,7 @@ window.showInfo = (personId) => {
             <span>${person.calcAveScore()}</span>
             `
         }
-        break;
+            break;
         case 'Employee': {
             html += `
             <label class='fw-bold'>Working day: </label>
@@ -320,7 +337,7 @@ window.showInfo = (personId) => {
             <span>${new Intl.NumberFormat('vn-VN').format(person.calcSalary())}VND</span>
             `
         }
-        break;
+            break;
         case 'Customer': {
             html += `
             <label class='fw-bold'>Name of company: </label>
@@ -387,7 +404,271 @@ function renderPerson(personList) {
     getElement('#tableList').innerHTML = html;
 }
 
-// Validation
+//Validation Student
+function validateStudent() {
+    let i = document.querySelectorAll(".sp-thongbao");
+    i.forEach((ele, index) => {
+        ele.style.display = "block";
+    });
+    let isValid = true;
+    let txtId = getElement('#txtStudentId');
+    let txtName = getElement('#txtStudentName');
+    let txtAddress = getElement('#txtStudentAddress');
+    let txtEmail = getElement('#txtStudentEmail');
+    let txtmath = getElement("#txtMath");
+    let txtphysics = getElement("#txtPhysics");
+    let txtchemistry = getElement("#txtChemistry");
+
+    // Check
+
+    let id = getElement("#studentId").value;
+    if (!id.trim()) {
+        isValid = false;
+        txtId.innerHTML = "Tài khoản không được để trống!"
+    } else if (!/^[0-9]{3,6}$/.test(id)) {
+        isValid = false;
+        txtId.innerHTML = "Tài khoản không hợp lệ!";
+    } else {
+        txtId.innerHTML = "";
+    }
+
+    let name = getElement("#studentName").value;
+    if (!name.trim()) {
+        isValid = false;
+        txtName.innerHTML = "Tên không được để trống!"
+    } else if (!/^[a-zA-Z]+$/.test(name)) {
+        isValid = false;
+        txtName.innerHTML = "Tên không hợp lệ!"
+    } else {
+        txtName.innerHTML = "";
+    }
+
+    let address = getElement("#studentAddress").value;
+    if (!address.trim()) {
+        isValid = false;
+        txtAddress.innerHTML = "Address không được để trống!"
+    } else {
+        txtAddress.innerHTML = "";
+    }
+
+    let email = getElement("#studentEmail").value;
+    if (!email.trim()) {
+        isValid = false;
+        txtEmail.innerHTML = "Email không được để trống!"
+    } else if (!/^[\w.]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(email)) {
+        isValid = false;
+        txtEmail.innerHTML = "Email không hợp lệ!";
+    } else {
+        txtEmail.innerHTML = "";
+    }
+
+    let math = getElement("#math").value;
+    if(!math.trim()){
+        isValid = false;
+        txtmath.innerHTML = "Điểm không được để trống";
+    }else if(!/^\d+$/.test(math) || (math.length > 1 && +math > 10)){
+        isValid = false;
+        txtmath.innerHTML = "Điểm không hợp lệ!";
+    }else{
+        txtmath.innerHTML ="";
+    }
+
+    let physics = getElement("#physics").value;
+    if(!physics.trim()){
+        isValid = false;
+        txtphysics.innerHTML = "Điểm không được để trống";
+    }else if(!/^\d+$/.test(physics) || (physics.length > 1 && +physics > 10)){
+        isValid = false;
+        txtphysics.innerHTML = "Điểm không hợp lệ!";
+    }else{
+        txtphysics.innerHTML ="";
+    }
+
+    let chemistry = getElement("#chemistry").value;
+    if(!chemistry.trim()){
+        isValid = false;
+        txtchemistry.innerHTML = "Điểm không được để trống";
+    }else if(!/^\d+$/.test(chemistry) || (chemistry.length > 1 && +chemistry > 10)){
+        isValid = false;
+        txtchemistry.innerHTML = "Điểm không hợp lệ!";
+    }else{
+        txtchemistry.innerHTML ="";
+    }
+    return isValid;
+}
+
+//Validation Employee
+function validateEmployee() {
+    let i = document.querySelectorAll(".sp-thongbao");
+    i.forEach((ele, index) => {
+        ele.style.display = "block";
+    });
+    let isValid = true;
+    let txtId = getElement('#txtEmployeeId');
+    let txtName = getElement('#txtEmployeeName');
+    let txtAddress = getElement('#txtEmployeeAddress');
+    let txtEmail = getElement('#txtEmployeeEmail');
+    let txtDays = getElement("#txtDays");
+    let txtSalaryUnit = getElement("#txtSalaryUnit");
+
+    // Check
+
+    let id = getElement("#employeeId").value;
+    if (!id.trim()) {
+        isValid = false;
+        txtId.innerHTML = "Tài khoản không được để trống!"
+    } else if (!/^[0-9]{3,6}$/.test(id)) {
+        isValid = false;
+        txtId.innerHTML = "Tài khoản không hợp lệ!";
+    } else {
+        txtId.innerHTML = "";
+    }
+
+    let name = getElement("#employeeName").value;
+    if (!name.trim()) {
+        isValid = false;
+        txtName.innerHTML = "Tên không được để trống!"
+    } else if (!/^[a-zA-Z]+$/.test(name)) {
+        isValid = false;
+        txtName.innerHTML = "Tên không hợp lệ!"
+    } else {
+        txtName.innerHTML = "";
+    }
+
+    let address = getElement("#employeeAddress").value;
+    if (!address.trim()) {
+        isValid = false;
+        txtAddress.innerHTML = "Address không được để trống!"
+    } else {
+        txtAddress.innerHTML = "";
+    }
+
+    let email = getElement("#employeeEmail").value;
+    if (!email.trim()) {
+        isValid = false;
+        txtEmail.innerHTML = "Email không được để trống!"
+    } else if (!/^[\w.]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(email)) {
+        isValid = false;
+        txtEmail.innerHTML = "Email không hợp lệ!";
+    } else {
+        txtEmail.innerHTML = "";
+    }
+
+    let days = getElement("#days").value;
+    if(!days.trim()){
+        isValid = false;
+        txtDays.innerHTML = "Ngày không được để trống";
+    }else if(!/^\d+$/.test(days)){
+        isValid = false;
+        txtDays.innerHTML = "Ngày không hợp lệ!";
+    }else{
+        txtDays.innerHTML ="";
+    }
+
+    let salaryUnit = getElement("#salaryUnit").value;
+    if(!salaryUnit.trim()){
+        isValid = false;
+        txtSalaryUnit.innerHTML = "Lương ngày không được để trống";
+    }else if(!/^\d+$/.test(salaryUnit)){
+        isValid = false;
+        txtSalaryUnit.innerHTML = "Lương ngày không hợp lệ!";
+    }else{
+        txtSalaryUnit.innerHTML ="";
+    }
+
+    return isValid;
+}
+
+//Validation Customer
+function validateCustomer() {
+    let i = document.querySelectorAll(".sp-thongbao");
+    i.forEach((ele, index) => {
+        ele.style.display = "block";
+    });
+    let isValid = true;
+    let txtId = getElement('#txtCustomerId');
+    let txtName = getElement('#txtCustomerName');
+    let txtAddress = getElement('#txtCustomerAddress');
+    let txtEmail = getElement('#txtCustomerEmail');
+    let txtCompany = getElement("#txtCompany");
+    let txtbillValue = getElement("#txtbillValue");
+    let txtInputRate = getElement('#txtInputRate');
+
+    // Check
+
+    let id = getElement("#customerId").value;
+    if (!id.trim()) {
+        isValid = false;
+        txtId.innerHTML = "Tài khoản không được để trống!"
+    } else if (!/^[0-9]{3,6}$/.test(id)) {
+        isValid = false;
+        txtId.innerHTML = "Tài khoản không hợp lệ!";
+    } else {
+        txtId.innerHTML = "";
+    }
+
+    let name = getElement("#customerName").value;
+    if (!name.trim()) {
+        isValid = false;
+        txtName.innerHTML = "Tên không được để trống!"
+    } else if (!/^[a-zA-Z]+$/.test(name)) {
+        isValid = false;
+        txtName.innerHTML = "Tên không hợp lệ!"
+    } else {
+        txtName.innerHTML = "";
+    }
+
+    let address = getElement("#customerAddress").value;
+    if (!address.trim()) {
+        isValid = false;
+        txtAddress.innerHTML = "Address không được để trống!"
+    } else {
+        txtAddress.innerHTML = "";
+    }
+
+    let email = getElement("#customerEmail").value;
+    if (!email.trim()) {
+        isValid = false;
+        txtEmail.innerHTML = "Email không được để trống!"
+    } else if (!/^[\w.]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(email)) {
+        isValid = false;
+        txtEmail.innerHTML = "Email không hợp lệ!";
+    } else {
+        txtEmail.innerHTML = "";
+    }
+
+    let company = getElement("#company").value;
+    if(!company.trim()){
+        isValid = false;
+        txtCompany.innerHTML = "Tên công ty không được để trống";
+    }else{
+        txtCompany.innerHTML ="";
+    }
+
+    let bill = getElement("#billValue").value;
+    if(!bill.trim()){
+        isValid = false;
+        txtbillValue.innerHTML = "Hóa đơn không được để trống";
+    }else if(!/^\d+$/.test(bill)){
+        isValid = false;
+        txtbillValue.innerHTML = "Hóa đơn không hợp lệ!";
+    }else{
+        txtbillValue.innerHTML ="";
+    }
+
+    let rate = getElement("#inputRate").value;
+    if (!rate.trim()) {
+        isValid = false;
+        txtInputRate.innerHTML = "Chưa đánh giá!"
+    } else if (rate === "Lựa chọn") {
+        isValid = false;
+        txtInputRate.innerHTML = "Chưa đánh giá!"
+    } else {
+        txtInputRate.innerHTML = "";
+    }
+
+    return isValid;
+}
 
 // Set local storage
 function setLocalStorage() {
