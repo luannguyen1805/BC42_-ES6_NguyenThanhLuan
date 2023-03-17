@@ -148,7 +148,7 @@ window.editPerson = (personId) => {
             getElement("#studentId").disabled = true;
             getElement(".label-student").innerHTML = "EDIT STUDENT";
             getElement("#modal-footer-S").innerHTML = `
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="updateStudent('${person.id}')">Cập nhật</button>
+        <button type="button" class="btn btn-primary" onclick="updateStudent('${person.id}')">Cập nhật</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
       `;
             $("#exampleModalStudent").modal("show");
@@ -164,7 +164,7 @@ window.editPerson = (personId) => {
             getElement("#employeeId").disabled = true;
             getElement(".label-employee").innerHTML = "EDIT EMPLOYEE";
             getElement("#modal-footer-E").innerHTML = `
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="updateEmployee('${person.id}')">Cập nhật</button>
+            <button type="button" class="btn btn-primary" onclick="updateEmployee('${person.id}')">Cập nhật</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
           `;
             $("#exampleModalEmployee").modal("show");
@@ -181,7 +181,7 @@ window.editPerson = (personId) => {
             getElement("#customerId").disabled = true;
             getElement(".label-customer").innerHTML = "EDIT CUSTOMER";
             getElement("#modal-footer-C").innerHTML = `
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="updateCustomer('${person.id}')">Cập nhật</button>
+            <button type="button" class="btn btn-primary" onclick="updateCustomer('${person.id}')">Cập nhật</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
           `;
             $("#exampleModalCustomer").modal("show");
@@ -198,6 +198,9 @@ window.updateStudent = (personId) => {
     let math = getElement("#math").value;
     let physics = getElement("#physics").value;
     let chemistry = getElement("#chemistry").value;
+    if (!validateStudent()) {
+        return;
+    }
     const student = new Student(id, name, address, email, math, physics, chemistry);
     let index = personList.findIndex((student) => {
         return student.id === id;
@@ -215,6 +218,9 @@ window.updateEmployee = (personId) => {
     let email = getElement("#employeeEmail").value;
     let days = getElement("#days").value;
     let salaryUnit = getElement("#salaryUnit").value;
+    if(!validateEmployee()){
+        return;
+    }
     const employee = new Employee(id, name, address, email, days, salaryUnit);
     let index = personList.findIndex((employee) => {
         return employee.id === id;
@@ -245,6 +251,9 @@ window.updateCustomer = (personId) => {
         default: {
             rate = "Choose";
         }
+    }
+    if(!validateCustomer()){
+        return;
     }
     const customer = new Customer(id, name, address, email, company, bill, rate);
     let index = personList.findIndex((customer) => {
